@@ -43,6 +43,33 @@ handlers.helloWorld = function (args) {
     return { messageValue: message };
 }
 
+handlers.checkIfFirstConnexion = function () {
+
+    var playerData = server.GetUserInternalData({
+        PlayFabId: currentPlayerId,
+        Keys: ["GameStarted"]
+    });
+
+    var gameStarted = false;
+    try {
+        gameStarted = playerData.Data["GameStarted"].Value;
+    } catch (e) {
+    }
+
+    if (!gameStarted) {
+        var updateUserDataResult = server.UpdateUserInternalData({
+            PlayFabId: currentPlayerId,
+            Data: {
+                "GameStarted": true
+           }
+        });
+
+        return { messageValue: "Game started" };
+    }
+
+    return { messageValue: "Game was already started" };
+}
+
 // This is a function that the game client would call whenever a player completes
 // a level. It updates a setting in the player's data that only game server
 // code can write - it is read-only on the client - and it updates a player
