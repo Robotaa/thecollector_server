@@ -67,7 +67,7 @@ handlers.checkIfFirstConnexion = function (args) {
         });
 
         // Set the items to the user
-           var titleData = server.GetTitleData();
+           var titleData = server.GetTitleData({});
 //         var keys = titleData.Data["StartKey"].Value;
 //         var lives = titleData.Data["StartLive"].Value;
 //         var shield = titleData.Data["StartShield"].Value;
