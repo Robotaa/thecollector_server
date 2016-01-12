@@ -67,13 +67,12 @@ handlers.checkIfFirstConnexion = function (args) {
         });
 
         // Set the items to the user
-           var titleData = server.GetTitleData({});
-//         var keys = titleData.Data["StartKey"].Value;
-//         var lives = titleData.Data["StartLive"].Value;
-//         var shield = titleData.Data["StartShield"].Value;
-//
-//         return { messageValue: "Game started " + keys + " " + lives + " " + shield };
-         return { messageValue: "Game started " };
+        var titleData = server.GetTitleData({});
+        var keys = titleData.Data["StartKey"].Value;
+        var lives = titleData.Data["StartLive"].Value;
+        var shield = titleData.Data["StartShield"].Value;
+
+        return { messageValue: "Game started " + keys + " " + lives + " " + shield };
     }
 
     return { messageValue: "Game was already started" };
