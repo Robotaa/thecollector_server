@@ -81,7 +81,7 @@ handlers.checkIfFirstConnexion = function (args) {
             itemIds.push("gr_key");
         }
         if (lives > 0) {
-            itemIds.push("gr_live");
+            itemIds.push("gr_life");
         }
         if (shield > 0) {
             itemIds.push("gr_shield");
