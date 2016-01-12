@@ -51,10 +51,11 @@ handlers.checkIfFirstConnexion = function (args) {
         Keys: ["GameStarted"]
     });
 
-    var gameStarted = false;
+    var gameStarted;
     try {
         gameStarted = playerData.Data["GameStarted"].Value;
     } catch (e) {
+        gameStarted = false;
     }
 
     if (!gameStarted) {
@@ -71,9 +72,9 @@ handlers.checkIfFirstConnexion = function (args) {
             Keys: ["StartKey", "StartLive", "StartShield"]
         });
 
-        var keys = titleData.Data["StartKey"].Value;
-        var lives = titleData.Data["StartLive"].Value;
-        var shield = titleData.Data["StartShield"].Value;
+        var keys = titleData.Data["StartKey"];
+        var lives = titleData.Data["StartLive"];
+        var shield = titleData.Data["StartShield"];
 
         return { messageValue: "Game started " + keys + " " + lives + " " + shield };
     }
