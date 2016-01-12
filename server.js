@@ -67,7 +67,7 @@ handlers.checkIfFirstConnexion = function (args) {
            }
         });
 
-        // Set the items to the user
+        // Get the starting itmes count
         var titleData = server.GetTitleData({
             Keys: ["StartKey", "StartLive", "StartShield"]
         });
@@ -75,8 +75,25 @@ handlers.checkIfFirstConnexion = function (args) {
         var keys = titleData.Data["StartKey"];
         var lives = titleData.Data["StartLive"];
         var shield = titleData.Data["StartShield"];
+        var itemIds = [];
 
-        return { messageValue: "Game started " + keys + " " + lives + " " + shield };
+        if (keys > 0) {
+            itemIds.push("gr_key");
+        }
+        if (lives > 0) {
+            itemIds.push("gr_live");
+        }
+        if (shield > 0) {
+            itemIds.push("gr_shield");
+        }
+
+        server.GrantItemsToUser({
+            PlayFabId: currentPlayerId,
+            Annotation: "Items given at start",
+            "ItemIds": itemIds
+        })
+
+        return { messageValue: "Game started" };
     }
 
     return { messageValue: "Game was already started" };
