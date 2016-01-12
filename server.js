@@ -43,8 +43,9 @@ handlers.helloWorld = function (args) {
     return { messageValue: message };
 }
 
-handlers.checkIfFirstConnexion = function () {
+handlers.checkIfFirstConnexion = function (args) {
 
+    // Get internakl data "GameStarted"
     var playerData = server.GetUserInternalData({
         PlayFabId: currentPlayerId,
         Keys: ["GameStarted"]
@@ -57,6 +58,7 @@ handlers.checkIfFirstConnexion = function () {
     }
 
     if (!gameStarted) {
+        // If game not stated set it at started
         var updateUserDataResult = server.UpdateUserInternalData({
             PlayFabId: currentPlayerId,
             Data: {
@@ -64,7 +66,13 @@ handlers.checkIfFirstConnexion = function () {
            }
         });
 
-        return { messageValue: "Game started" };
+        // Set the items to the user
+        var titleData = server.GetTitleData();
+        var keys = titleData.Data["StartKey"].Value;
+        var lives = titleData.Data["StartLive"].Value;
+        var shield = titleData.Data["StartShield"].Value;
+
+        return { messageValue: "Game started " + keys + " " + lives + " " + shield };
     }
 
     return { messageValue: "Game was already started" };
