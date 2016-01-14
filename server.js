@@ -114,6 +114,15 @@ handlers.sellItem = function (args) {
                 CatalogVersion: "Alpha"
             });
 
+
+            var itemsString = "";
+            for (var j = 0; j < catalogItems.length; ++j) {
+                var catalogItem = catalogItems[j];
+                itemsString += catalogItem.ItemId;
+            }
+
+            return { messageValue: itemsString};
+
             // Get the item in the catalog
             for (var j = 0; j < catalogItems.length; ++j) {
                 var catalogItem = catalogItems[j];
@@ -124,7 +133,6 @@ handlers.sellItem = function (args) {
 
                     // Remove the item to the users
 
-                    // Get the item in the catalog
                     return { messageValue: "Sell item: item instance id =  " + itemInstanceId + " price " + sellValue};
                 }
             }
