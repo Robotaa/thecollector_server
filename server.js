@@ -114,11 +114,7 @@ handlers.sellItem = function (args) {
                 CatalogVersion: "Alpha"
             });
 
-            if (catalogItems !== null && catalogItems !== undefined) {
-                return { messageValue: "catalogItems not null"};
-            }
-
-            var itemsString = "" + catalogItems.length + ":";
+            var itemsString = "" + catalogItems.Catalog.length + ":";
             for (var j = 0; j < catalogItems.length; ++j) {
                 var catalogItem = catalogItems[j];
                 itemsString += catalogItem.ItemId;
