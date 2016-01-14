@@ -115,7 +115,7 @@ handlers.sellItem = function (args) {
             });
 
 
-            var itemsString = "";
+            var itemsString = "" + catalogItems.length + ":";
             for (var j = 0; j < catalogItems.length; ++j) {
                 var catalogItem = catalogItems[j];
                 itemsString += catalogItem.ItemId;
