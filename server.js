@@ -108,7 +108,7 @@ handlers.sellItem = function (args) {
     // Get the items from the user inventory
     for (var i = 0; i < userInventory.Inventory.length; ++i) {
         var item = userInventory.Inventory[i];
-        if (item.ItemId == args.itemsId) {
+        if (item.ItemId == args.itemId) {
 
             var itemInstanceId = item.ItemInstanceId;
 
