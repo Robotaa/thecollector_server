@@ -78,13 +78,13 @@ handlers.checkIfFirstConnexion = function (args) {
         var itemIds = [];
 
         for (var i = 0; i < keys; ++i) {
-            itemIds.push("gr_key");
+            itemIds.push("att_key");
         }
         for (var i = 0; i < lives; ++i) {
-            itemIds.push("gr_life");
+            itemIds.push("att_life");
         }
         for (var i = 0; i < shield; ++i) {
-            itemIds.push("gr_shield");
+            itemIds.push("att_shield");
         }
 
         server.GrantItemsToUser({
