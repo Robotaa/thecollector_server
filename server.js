@@ -116,7 +116,7 @@ handlers.sellItem = function (args) {
 
             // Get the item in the catalog
             for (var j = 0; j < catalogItems.Catalog.length; ++j) {
-                var catalogItem = catalogItems[j];
+                var catalogItem = catalogItems.Catalog[j];
                 if (catalogItem.ItemId == args.itemId) {
 
                     var itemInstanceId = item.ItemInstanceId;
