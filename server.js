@@ -114,16 +114,8 @@ handlers.sellItem = function (args) {
                 CatalogVersion: "Alpha"
             });
 
-            var itemsString = "" + catalogItems.Catalog.length + ":";
-            for (var j = 0; j < catalogItems.length; ++j) {
-                var catalogItem = catalogItems[j];
-                itemsString += catalogItem.ItemId;
-            }
-
-            return { messageValue: itemsString};
-
             // Get the item in the catalog
-            for (var j = 0; j < catalogItems.length; ++j) {
+            for (var j = 0; j < catalogItems.Catalog.length; ++j) {
                 var catalogItem = catalogItems[j];
                 if (catalogItem.ItemId == args.itemId) {
 
