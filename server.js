@@ -137,7 +137,7 @@ handlers.sellItem = function (args) {
                     });
 
                     return {
-                        messageValue: "Sell item: item instance id =  " + itemInstanceId + " value " + sellValue + " remaining " + modifidItem.RemainingUses,
+                        messageValue: "Sell item: item instance id =  " + itemInstanceId + " value " + sellValue + " remaining " + modifyItem.RemainingUses,
                         remainingItemUses: modifyItem.RemainingUses,
                         newCoinCredit: modifyCoins.Balance
                     };
