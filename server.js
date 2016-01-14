@@ -99,6 +99,32 @@ handlers.checkIfFirstConnexion = function (args) {
     return { messageValue: "Game was already started" };
 }
 
+handlers.sellItem = function (args) {
+
+    var userInventory = server.GetUserInventory({
+        PlayFabId: currentPlayerId
+    });
+
+    // Get the items from the user inventory
+    for (var i = 0; i < userInventory.Inventory.length; ++i) {
+        var item = userInventory.Inventory[i];
+        if (item.ItemId == args.itemsId) {
+
+            var itemInstanceId = item.ItemInstanceId;
+
+            // Get the item in the catalog
+            return { messageValue: "Sell item: item instance id =  " + itemInstanceId };
+        }
+    }
+
+    return { messageValue: "Sell item: item not found" };
+
+    // server.ModifyItemUses({
+    //     PlayFabId: currentPlayerId,
+    //     Keys: ["GameStarted"]
+    // });
+}
+
 // This is a function that the game client would call whenever a player completes
 // a level. It updates a setting in the player's data that only game server
 // code can write - it is read-only on the client - and it updates a player
