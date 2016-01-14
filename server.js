@@ -77,13 +77,13 @@ handlers.checkIfFirstConnexion = function (args) {
         var shield = titleData.Data["StartShield"];
         var itemIds = [];
 
-        if (keys > 0) {
+        for (var i = 0; i < keys; ++i) {
             itemIds.push("gr_key");
         }
-        if (lives > 0) {
+        for (var i = 0; i < lives; ++i) {
             itemIds.push("gr_life");
         }
-        if (shield > 0) {
+        for (var i = 0; i < shield; ++i) {
             itemIds.push("gr_shield");
         }
 
