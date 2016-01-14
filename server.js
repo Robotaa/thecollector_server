@@ -123,13 +123,24 @@ handlers.sellItem = function (args) {
                     var sellValue = catalogItem.VirtualCurrencyPrices["$C"];
 
                     // Remove the item to the users
-                    var modifidItem = server.ModifyItemUses({
+                    var modifyItem = server.ModifyItemUses({
                         PlayFabId: currentPlayerId,
                         ItemInstanceId: itemInstanceId,
                         UsesToAdd: -1
                     });
 
-                    return { messageValue: "Sell item: item instance id =  " + itemInstanceId + " value " + sellValue + " remaining " + modifidItem.RemainingUses};
+                    // Credit user
+                    var modifyCoins = server.AddUserVirtualCurrency({
+                        PlayFabId: currentPlayerId,
+                        VirtualCurrency: "$C",
+                        Amount: sellValue
+                    });
+
+                    return {
+                        messageValue: "Sell item: item instance id =  " + itemInstanceId + " value " + sellValue + " remaining " + modifidItem.RemainingUses,
+                        remainingItemUses: modifyItem.RemainingUses,
+                        newCoinCredit: modifyCoins.Balance;
+                    };
                 }
             }
         }
