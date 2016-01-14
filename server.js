@@ -120,7 +120,7 @@ handlers.sellItem = function (args) {
                 if (catalogItem.ItemId == args.itemId) {
 
                     var itemInstanceId = item.ItemInstanceId;
-                    var sellValue = item.VirtualCurrencyPrices["$C"];
+                    var sellValue = catalogItem.VirtualCurrencyPrices["$C"];
 
                     // Remove the item to the users
 
