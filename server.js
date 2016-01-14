@@ -123,19 +123,19 @@ handlers.sellItem = function (args) {
                     var sellValue = catalogItem.VirtualCurrencyPrices["$C"];
 
                     // Remove the item to the users
+                    var modifidItem = server.ModifyItemUses({
+                        PlayFabId: currentPlayerId,
+                        ItemInstanceId: itemInstanceId,
+                        UsesToAdd: -1
+                    });
 
-                    return { messageValue: "Sell item: item instance id =  " + itemInstanceId + " price " + sellValue};
+                    return { messageValue: "Sell item: item instance id =  " + itemInstanceId + " value " + sellValue + " remaining " + modifidItem.RemainingUses};
                 }
             }
         }
     }
 
     return { messageValue: "Sell item: item not found" };
-
-    // server.ModifyItemUses({
-    //     PlayFabId: currentPlayerId,
-    //     Keys: ["GameStarted"]
-    // });
 }
 
 // This is a function that the game client would call whenever a player completes
