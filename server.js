@@ -110,10 +110,24 @@ handlers.sellItem = function (args) {
         var item = userInventory.Inventory[i];
         if (item.ItemId == args.itemId) {
 
-            var itemInstanceId = item.ItemInstanceId;
+            var catalogItems = server.GetCatalogItems({
+                CatalogVersion: "Alpha"
+            });
 
             // Get the item in the catalog
-            return { messageValue: "Sell item: item instance id =  " + itemInstanceId };
+            for (var j = 0; j < catalogItems.length; ++j) {
+                var catalogItem = catalogItems[j];
+                if (catalogItem.ItemId == args.itemId) {
+
+                    var itemInstanceId = item.ItemInstanceId;
+                    var sellValue = item.VirtualCurrencyPrices["$C"];
+
+                    // Remove the item to the users
+
+                    // Get the item in the catalog
+                    return { messageValue: "Sell item: item instance id =  " + itemInstanceId + " price " + sellValue};
+                }
+            }
         }
     }
 
