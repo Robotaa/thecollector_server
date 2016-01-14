@@ -111,7 +111,12 @@ handlers.sellItem = function (args) {
         if (item.ItemId == args.itemId) {
 
             var catalogItems = server.GetCatalogItems({
+                CatalogVersion: "Alpha"
             });
+
+            if (catalogItems !== null && catalogItems !== undefined) {
+                return { messageValue: "catalogItems not null"};
+            }
 
             var itemsString = "" + catalogItems.length + ":";
             for (var j = 0; j < catalogItems.length; ++j) {
