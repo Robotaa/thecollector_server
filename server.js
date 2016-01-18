@@ -149,7 +149,7 @@ handlers.sellItem = function (args) {
     return { messageValue: "Sell item: item not found" };
 }
 
-handlers.ManageItemEffect = function (args) {
+handlers.manageItemEffect = function (args) {
 
     var itemId = args.itemId;
 
