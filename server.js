@@ -154,7 +154,7 @@ handlers.manageItemEffect = function (args) {
     var itemId = args.itemId;
 
     // Get atrtibuts values
-    var userIventory = serve.GetUserInventory({
+    var userIventory = server.GetUserInventory({
         PlayFabId: currentPlayerId,
     });
 
@@ -188,7 +188,7 @@ handlers.manageItemEffect = function (args) {
         return { messageValue: "Manage Item Effect : nothing" };
     }
 
-    var userIventory = serve.GetUserInventory({
+    var userIventory = server.GetUserInventory({
         PlayFabId: currentPlayerId,
     });
 
