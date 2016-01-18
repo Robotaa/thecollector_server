@@ -123,11 +123,13 @@ handlers.sellItem = function (args) {
                     var sellValue = catalogItem.VirtualCurrencyPrices["$C"];
 
                     // Remove the item to the users
-                    var modifyItem = server.ModifyItemUses({
-                        PlayFabId: currentPlayerId,
-                        ItemInstanceId: itemInstanceId,
-                        UsesToAdd: -1
-                    });
+                    // var modifyItem = server.ModifyItemUses({
+                    //     PlayFabId: currentPlayerId,
+                    //     ItemInstanceId: itemInstanceId,
+                    //     UsesToAdd: -1
+                    // });
+
+                    var modifyItem = handlers.consumeItem(itemInstanceId);
 
                     // Credit user
                     var modifyCoins = server.AddUserVirtualCurrency({
@@ -152,6 +154,7 @@ handlers.sellItem = function (args) {
 handlers.manageItemEffect = function (args) {
 
     var itemId = args.itemId;
+    var itemInstanceId = args.itemInstanceId;
 
     // Get atrtibuts values
     var userIventory = server.GetUserInventory({
@@ -162,8 +165,6 @@ handlers.manageItemEffect = function (args) {
     var lives = handlers.getUserItemsCount(userIventory, "att_life");
     var keys = handlers.getUserItemsCount(userIventory, "att_key");
     var shields = handlers.getUserItemsCount(userIventory, "att_shield");
-
-    return { messageValue: "Manage Item Effect : coins: " + coins + " lives: " + lives + " keys: " + keys + " shield : " + shields};
 
     var coinsIncr = 0;
     var livesIncr = 0;
@@ -210,6 +211,15 @@ handlers.manageItemEffect = function (args) {
     // SubtractUserVirtualCurrency
 
     return { messageValue: "Manage Item Effect :" };
+}
+
+handlers.consumeItem = function (itemInstanceId) {
+    var modifyItem = server.ModifyItemUses({
+        PlayFabId: currentPlayerId,
+        ItemInstanceId: itemInstanceId,
+        UsesToAdd: -1
+    });
+    return modifyItem;
 }
 
 handlers.getUserItemsCount = function (userIventory, itemId) {
