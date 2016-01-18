@@ -228,7 +228,7 @@ handlers.manageItemEffect = function (args) {
     // Shield
     if (shieldsIncr != 0) {
         if (shields.RemainingUses + shieldsIncr < 0) {
-            shieldsIncr = shields.RemainingUses;
+            shieldsIncr = -shields.RemainingUses;
         }
         handlers.modifyItemUses(shields.ItemInstanceId, shieldsIncr);
     }
@@ -236,7 +236,7 @@ handlers.manageItemEffect = function (args) {
     // Key
     if (keysIncr != 0) {
         if (keys.RemainingUses + keysIncr < 0) {
-            keysIncr = keys.RemainingUses;
+            keysIncr = -keys.RemainingUses;
         }
         handlers.modifyItemUses(keys.ItemInstanceId, keysIncr);
     }
@@ -244,7 +244,7 @@ handlers.manageItemEffect = function (args) {
     // Live
     if (livesIncr != 0) {
         if (lives.RemainingUses + livesIncr < 0) {
-            livesIncr = lives.RemainingUses;
+            livesIncr = -lives.RemainingUses;
         }
         handlers.modifyItemUses(lives.ItemInstanceId, livesIncr);
     }
