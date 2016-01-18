@@ -250,7 +250,7 @@ handlers.manageItemEffect = function (args) {
 //     }
 
     // Consume the item found on the grid
-    handlers.consumeItem(itemInstanceId);
+//    handlers.consumeItem(itemInstanceId);
 
     return { messageValue: "Manage Item Effect :" };
 }
