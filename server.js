@@ -215,7 +215,7 @@ handlers.manageItemEffect = function (args) {
 handlers.getUserItemsCount = function (userIventory, itemId) {
     for (var i = 0; i < userIventory.Inventory.length; ++i) {
         var item = userIventory.Inventory[i];
-        if (item.itemId == itemId) {
+        if (item.ItemId == itemId) {
             return item.RemainingUses;
         }
     }
