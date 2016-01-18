@@ -159,9 +159,9 @@ handlers.manageItemEffect = function (args) {
     });
 
     var coins = userIventory.VirtualCurrency["$C"];
-    var lives = handlers.getUserItemsCount("gr_life");
-    var keys = handlers.getUserItemsCount("gr_key");
-    var shields = handlers.getUserItemsCount("gr_shield");
+    var lives = handlers.getUserItemsCount(userIventory, "gr_life");
+    var keys = handlers.getUserItemsCount(userIventory, "gr_key");
+    var shields = handlers.getUserItemsCount(userIventory, "gr_shield");
 
     return { messageValue: "Manage Item Effect : coins: " + coins + " lives: " + lives + " keys: " + keys + " shield : " + shields};
 
