@@ -45,7 +45,7 @@ handlers.helloWorld = function (args) {
 
 handlers.checkIfFirstConnexion = function (args) {
 
-    // Get internakl data "GameStarted"
+    // Get internal data "GameStarted"
     var playerData = server.GetUserInternalData({
         PlayFabId: currentPlayerId,
         Keys: ["GameStarted"]
@@ -148,6 +148,80 @@ handlers.sellItem = function (args) {
 
     return { messageValue: "Sell item: item not found" };
 }
+
+handlers.ManageItemEffect = function (args) {
+
+    var itemId = args.itemId;
+
+    // Get atrtibuts values
+    var userIventory = serve.GetUserInventory({
+        PlayFabId: currentPlayerId,
+    });
+
+    var coins = userIventory.VirtualCurrency["$C"];
+    var lives = handlers.getUserItemsCount("gr_life");
+    var keys = handlers.getUserItemsCount("gr_key");
+    var shields = handlers.getUserItemsCount("gr_shield");
+
+    return { messageValue: "Manage Item Effect : coins: " + coins + " lives: " + lives + " keys: " + keys + " shield : " + shields};
+
+    var coinsIncr = 0;
+    var livesIncr = 0;
+    var keysIncr = 0;
+    var shieldsIncr = 0;
+
+    var itemIds = [];
+
+    if (itemId == "gr_bird") {
+    } else if (itemId == "gr_man") {
+    } else if (itemId == "gr_chest") {
+    } else if (itemId == "gr_coin") {
+    } else if (itemId == "gr_boss") {
+    } else if (itemId == "gr_livepotion") {
+    } else if (itemId == "gr_key") {
+    } else if (itemId == "gr_shield") {
+    } else if (itemId == "gr_life") {
+    } else if (itemId == "gr_map") {
+    }
+
+    if (itemIds.length == 0) {
+        return { messageValue: "Manage Item Effect : nothing" };
+    }
+
+    var userIventory = serve.GetUserInventory({
+        PlayFabId: currentPlayerId,
+    });
+
+    server.GrantItemsToUser({
+        CatalogVersion: "Alpha",
+        PlayFabId: currentPlayerId,
+        Annotation: "Item from grid",
+        ItemIds: itemIds
+    });
+
+    var vcData = server.AddUserVirtualCurrency({
+        PlayFabId: currentPlayerId,
+        VirtualCurrency: "$C",
+        Amount: 100
+    });
+
+    // vcData.Balance
+
+    // SubtractUserVirtualCurrency
+
+    return { messageValue: "Manage Item Effect :" };
+}
+
+handlers.getUserItemsCount = function (userIventory, itemId) {
+    for (var i = 0; i < userIventory.Inventory.length; ++i) {
+        var item = userIventory.Inventory[i];
+        if (item.itemId == itemId) {
+            return item.RemainingUses;
+        }
+    }
+    return 0;
+}
+
 
 // This is a function that the game client would call whenever a player completes
 // a level. It updates a setting in the player's data that only game server
