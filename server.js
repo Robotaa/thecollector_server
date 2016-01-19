@@ -239,7 +239,7 @@ handlers.resetAttributs = function() {
     var shieldsIncr = shields - startShield;
     var livesIncr = lives - startLives;
 
-    handlers.addAttributs(coinsIncr, shieldsIncr, keysIncr, livesIncr);
+    handlers.addAttributs(-coinsIncr, -shieldsIncr, -keysIncr, -livesIncr);
 
 }
 
