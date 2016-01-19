@@ -239,11 +239,9 @@ handlers.resetAttributs = function() {
     var shieldsIncr = shields.RemainingUses - startShield;
     var livesIncr = lives.RemainingUses - startLives;
 
-    return { messageValue: "resetAttributs : coins "  + coinsIncr + " keys " + keysIncr + " shields " + shieldsIncr + " live " + livesIncr};
-
-
     handlers.addAttributs(-coinsIncr, -shieldsIncr, -keysIncr, -livesIncr);
 
+    return { messageValue: "resetAttributs : coins "  + coinsIncr + " keys " + keysIncr + " shields " + shieldsIncr + " live " + livesIncr};
 }
 
 handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
