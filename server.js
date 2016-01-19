@@ -280,27 +280,33 @@ handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
     }
 
     // Shield
-    if (shields.RemainingUses + shieldsAdd < 0) {
-        shieldsAdd = -shields.RemainingUses;
-    }
-    if (shieldsAdd != 0) {
-        handlers.modifyItemUses(shields.ItemInstanceId, shieldsAdd);
+    if (shields != null) {
+        if (shields.RemainingUses + shieldsAdd < 0) {
+            shieldsAdd = -shields.RemainingUses;
+        }
+        if (shieldsAdd != 0) {
+            handlers.modifyItemUses(shields.ItemInstanceId, shieldsAdd);
+        }
     }
 
     // Key
-    if (keys.RemainingUses + keysAdd < 0) {
-        keysAdd = -keys.RemainingUses;
-    }
-    if (keysAdd != 0) {
-        handlers.modifyItemUses(keys.ItemInstanceId, keysAdd);
+    if (keys != null) {
+        if (keys.RemainingUses + keysAdd < 0) {
+            keysAdd = -keys.RemainingUses;
+        }
+        if (keysAdd != 0) {
+            handlers.modifyItemUses(keys.ItemInstanceId, keysAdd);
+        }
     }
 
     // Live
-    if (lives.RemainingUses + livesAdd < 0) {
-        livesAdd = -lives.RemainingUses;
-    }
-    if (livesAdd != 0) {
-        handlers.modifyItemUses(lives.ItemInstanceId, livesAdd);
+    if (lives != null) {
+        if (lives.RemainingUses + livesAdd < 0) {
+            livesAdd = -lives.RemainingUses;
+        }
+        if (livesAdd != 0) {
+            handlers.modifyItemUses(lives.ItemInstanceId, livesAdd);
+        }
     }
 }
 
