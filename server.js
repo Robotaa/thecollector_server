@@ -66,7 +66,7 @@ handlers.checkIfFirstConnexion = function (args) {
             PlayFabId: currentPlayerId,
             Annotation: "Items given at start",
             "ItemIds": itemIds
-        })
+        });
 
         return { messageValue: "Game started" };
     }
@@ -166,8 +166,9 @@ handlers.manageItemEffect = function (args) {
         shieldsIncr = -2;
 
         // Live
-        if (shields == null) {
-            livesIncr = -(Math.floor(Math.random() * 2) + 1);
+        livesIncr = -(Math.floor(Math.random() * 2) + 1);
+        if (shields != null) {
+            livesIncr /= 2;
         }
 
     } else if (itemId == "gr_chest") {
@@ -183,8 +184,9 @@ handlers.manageItemEffect = function (args) {
         shieldsIncr = -2;
 
         // Live
-        if (shields == null) {
-            livesIncr = -(Math.floor(Math.random() * 3) + 2);
+        livesIncr = -(Math.floor(Math.random() * 3) + 2);
+        if (shields != null) {
+            livesIncr /= 2;
         }
 
     } else if (itemId == "gr_livepotion") {
@@ -279,6 +281,8 @@ handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
         });
     }
 
+    var itemIds = [];
+
     // Shield
     if (shields != null) {
         if (shields.RemainingUses + shieldsAdd < 0) {
@@ -286,6 +290,10 @@ handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
         }
         if (shieldsAdd != 0) {
             handlers.modifyItemUses(shields.ItemInstanceId, shieldsAdd);
+        }
+    } else {
+        for (var i = 0; i < shield; ++i) {
+            itemIds.push("att_shield");
         }
     }
 
@@ -297,6 +305,10 @@ handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
         if (keysAdd != 0) {
             handlers.modifyItemUses(keys.ItemInstanceId, keysAdd);
         }
+    } else {
+        for (var i = 0; i < keys; ++i) {
+            itemIds.push("att_key");
+        }
     }
 
     // Live
@@ -307,6 +319,17 @@ handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
         if (livesAdd != 0) {
             handlers.modifyItemUses(lives.ItemInstanceId, livesAdd);
         }
+    } else {
+        for (var i = 0; i < lives; ++i) {
+            itemIds.push("att_life");
+        }
+    }
+
+    if (itemIds.length > 0) {
+        server.GrantItemsToUser({
+            PlayFabId: currentPlayerId,
+            "ItemIds": itemIds
+        });
     }
 }
 
