@@ -42,7 +42,7 @@ handlers.checkIfFirstConnexion = function (args) {
            }
         });
 
-        // Get the starting itmes count
+        // Get the starting att values
         var titleData = server.GetTitleData({
             Keys: ["StartKey", "StartLive", "StartShield"]
         });
@@ -211,6 +211,36 @@ handlers.manageItemEffect = function (args) {
     handlers.modifyItemUses(itemInstanceId, -1);
 
     return { messageValue: "Manage Item Effect : consumeItem " + itemInstanceId };
+}
+
+handlers.resetAttributs = function() {
+
+    // Get the starting att values
+    var titleData = server.GetTitleData({
+        Keys: ["StartKey", "StartLive", "StartShield"]
+    });
+
+    var startKeys = titleData.Data["StartKey"];
+    var startLives = titleData.Data["StartLive"];
+    var startShield = titleData.Data["StartShield"];
+
+    // Get attributs values
+    var userIventory = server.GetUserInventory({
+        PlayFabId: currentPlayerId,
+    });
+
+    var coins = userIventory.VirtualCurrency["$C"];
+    var keys = handlers.getUserItems(userIventory, "att_key");
+    var shields = handlers.getUserItems(userIventory, "att_shield");
+    var lives = handlers.getUserItems(userIventory, "att_life");
+
+    var coinsIncr = coins - 100;
+    var keysIncr = keys - startKeys;
+    var shieldsIncr = shields - startShield;
+    var livesIncr = lives - startLives;
+
+    handlers.addAttributs(coinsIncr, shieldsIncr, keysIncr, livesIncr);
+
 }
 
 handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
