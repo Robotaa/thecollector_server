@@ -235,9 +235,9 @@ handlers.resetAttributs = function() {
     var lives = handlers.getUserItems(userIventory, "att_life");
 
     var coinsIncr = coins - 100;
-    var keysIncr = keys - startKeys.RemainingUses;
-    var shieldsIncr = shields - startShield.RemainingUses;
-    var livesIncr = lives - startLives.RemainingUses;
+    var keysIncr = keys.RemainingUses - startKeys;
+    var shieldsIncr = shields.RemainingUses - startShield;
+    var livesIncr = lives.RemainingUses - startLives;
 
     return { messageValue: "resetAttributs : coins "  + coinsIncr + " keys " + keysIncr + " shields " + shieldsIncr + " live " + livesIncr};
 
