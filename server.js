@@ -74,6 +74,10 @@ handlers.checkIfFirstConnexion = function (args) {
     return { messageValue: "Game was already started" };
 }
 
+handlers.gameOver = function () {
+
+}
+
 handlers.sellItem = function (args) {
 
     var userInventory = server.GetUserInventory({
@@ -96,7 +100,7 @@ handlers.sellItem = function (args) {
 
                     var itemInstanceId = item.ItemInstanceId;
                     var sellValue = catalogItem.VirtualCurrencyPrices["$C"];
-                    var modifyItem = handlers.consumeItem(itemInstanceId);
+                    var modifyItem = handlers.modifyItemUses(itemInstanceId, -1);
 
                     // Credit user
                     var modifyCoins = server.AddUserVirtualCurrency({
@@ -122,16 +126,6 @@ handlers.manageItemEffect = function (args) {
 
     var itemId = args.itemId;
     var itemInstanceId = args.itemInstanceId;
-
-    // Get attributs values
-    var userIventory = server.GetUserInventory({
-        PlayFabId: currentPlayerId,
-    });
-
-    var coins = userIventory.VirtualCurrency["$C"];
-    var shields = handlers.getUserItems(userIventory, "att_shield");
-    var keys = handlers.getUserItems(userIventory, "att_key");
-    var lives = handlers.getUserItems(userIventory, "att_life");
 
     var coinsIncr = 0;
     var shieldsIncr = 0;
@@ -210,58 +204,65 @@ handlers.manageItemEffect = function (args) {
         });
     }
 
-    // Coins
-    if (coinsIncr > 0) {
-        server.AddUserVirtualCurrency({
-            PlayFabId: currentPlayerId,
-            VirtualCurrency: "$C",
-            Amount: coinsIncr
-        });
-    } else if (coinsIncr < 0) {
-        server.SubtractUserVirtualCurrency({
-            PlayFabId: currentPlayerId,
-            VirtualCurrency: "$C",
-            Amount: coinsIncr
-        });
-    }
-
-    // Shield
-    if (shieldsIncr != 0) {
-        if (shields.RemainingUses + shieldsIncr < 0) {
-            shieldsIncr = -shields.RemainingUses;
-        }
-        handlers.modifyItemUses(shields.ItemInstanceId, shieldsIncr);
-    }
-
-    // Key
-    if (keysIncr != 0) {
-        if (keys.RemainingUses + keysIncr < 0) {
-            keysIncr = -keys.RemainingUses;
-        }
-        handlers.modifyItemUses(keys.ItemInstanceId, keysIncr);
-    }
-
-    // Live
-    if (livesIncr != 0) {
-        if (lives.RemainingUses + livesIncr < 0) {
-            livesIncr = -lives.RemainingUses;
-        }
-        handlers.modifyItemUses(lives.ItemInstanceId, livesIncr);
-    }
+    // Modify att
+    handlers.addAttributs(coinsIncr, shieldsIncr, keysIncr, livesIncr);
 
     // Consume the item found on the grid
-    handlers.consumeItem(itemInstanceId);
+    handlers.modifyItemUses(itemInstanceId, -1);
 
     return { messageValue: "Manage Item Effect : consumeItem " + itemInstanceId };
 }
 
-handlers.consumeItem = function (itemInstanceId) {
-    var modifyItem = server.ModifyItemUses({
+handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
+
+    // Get attributs values
+    var userIventory = server.GetUserInventory({
         PlayFabId: currentPlayerId,
-        ItemInstanceId: itemInstanceId,
-        UsesToAdd: -1
     });
-    return modifyItem;
+
+    var coins = userIventory.VirtualCurrency["$C"];
+    var shields = handlers.getUserItems(userIventory, "att_shield");
+    var keys = handlers.getUserItems(userIventory, "att_key");
+    var lives = handlers.getUserItems(userIventory, "att_life");
+
+    // Coins
+    if (coinsAdd > 0) {
+        server.AddUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "$C",
+            Amount: coinsAdd
+        });
+    } else if (coinsAdd < 0) {
+        server.SubtractUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "$C",
+            Amount: -coinsAdd
+        });
+    }
+
+    // Shield
+    if (shieldsAdd != 0) {
+        if (shields.RemainingUses + shieldsAdd < 0) {
+            shieldsAdd = -shields.RemainingUses;
+        }
+        handlers.modifyItemUses(shields.ItemInstanceId, shieldsAdd);
+    }
+
+    // Key
+    if (keysAdd != 0) {
+        if (keys.RemainingUses + keysAdd < 0) {
+            keysAdd = -keys.RemainingUses;
+        }
+        handlers.modifyItemUses(keys.ItemInstanceId, keysAdd);
+    }
+
+    // Live
+    if (livesAdd != 0) {
+        if (lives.RemainingUses + livesAdd < 0) {
+            livesAdd = -lives.RemainingUses;
+        }
+        handlers.modifyItemUses(lives.ItemInstanceId, livesAdd);
+    }
 }
 
 handlers.modifyItemUses = function (itemInstanceId, count) {
