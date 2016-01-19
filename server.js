@@ -167,7 +167,7 @@ handlers.manageItemEffect = function (args) {
 
         // Live
         if (shields == null) {
-            livesIncr = -Math.floor(Math.random() * 2) + 1;
+            livesIncr = -(Math.floor(Math.random() * 2) + 1);
         }
 
     } else if (itemId == "gr_chest") {
@@ -184,7 +184,7 @@ handlers.manageItemEffect = function (args) {
 
         // Live
         if (shields == null) {
-            livesIncr = -Math.floor(Math.random() * 3) + 2;
+            livesIncr = -(Math.floor(Math.random() * 3) + 2);
         }
 
     } else if (itemId == "gr_livepotion") {
