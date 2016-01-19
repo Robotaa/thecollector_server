@@ -134,17 +134,25 @@ handlers.manageItemEffect = function (args) {
 
     var itemIds = [];
 
+    // Get attributs values
+    var userIventory = server.GetUserInventory({
+        PlayFabId: currentPlayerId,
+    });
+
+    var shields = handlers.getUserItems(userIventory, "att_shield");
+
+
     if (itemId == "gr_bird") {
         // Coins
         if (Math.random() > 0.1) {
             coinsIncr = Math.floor(Math.random() * 20);
         }
+
         // Shield
-        if (Math.random() > 0.9) {
-            shieldsIncr = -1;
-        }
+        shieldsIncr = -1;
+
         // Live
-        if (Math.random() > 0.9) {
+        if (shields == 0) {
             livesIncr = -1;
         }
 
@@ -153,13 +161,13 @@ handlers.manageItemEffect = function (args) {
         if (Math.random() > 0.5) {
             coinsIncr = Math.floor(Math.random() * 100);
         }
+
         // Shield
-        if (Math.random() > 0.5) {
-            shieldsIncr = -1;
-        }
+        shieldsIncr = -2;
+
         // Live
-        if (Math.random() > 0.5) {
-            livesIncr = -Math.floor(Math.random() * 2);
+        if (shields == 0) {
+            livesIncr = -Math.floor(Math.random() * 2) + 1;
         }
 
     } else if (itemId == "gr_chest") {
@@ -170,13 +178,13 @@ handlers.manageItemEffect = function (args) {
         if (Math.random() > 0.5) {
             coinsIncr = Math.floor(Math.random() * 1000);
         }
+
         // Shield
-        if (Math.random() > 0.2) {
-            shieldsIncr = -Math.floor(Math.random() * 2);
-        }
+        shieldsIncr = -2;
+
         // Live
-        if (Math.random() > 0.5) {
-            livesIncr = -Math.floor(Math.random() * 3);
+        if (shields == 0) {
+            livesIncr = -Math.floor(Math.random() * 3) + 2;
         }
 
     } else if (itemId == "gr_livepotion") {
