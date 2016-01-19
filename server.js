@@ -152,7 +152,7 @@ handlers.manageItemEffect = function (args) {
         shieldsIncr = -1;
 
         // Live
-        if (shields == 0) {
+        if (shields == null) {
             livesIncr = -1;
         }
 
@@ -166,7 +166,7 @@ handlers.manageItemEffect = function (args) {
         shieldsIncr = -2;
 
         // Live
-        if (shields == 0) {
+        if (shields == null) {
             livesIncr = -Math.floor(Math.random() * 2) + 1;
         }
 
@@ -183,7 +183,7 @@ handlers.manageItemEffect = function (args) {
         shieldsIncr = -2;
 
         // Live
-        if (shields == 0) {
+        if (shields == null) {
             livesIncr = -Math.floor(Math.random() * 3) + 2;
         }
 
