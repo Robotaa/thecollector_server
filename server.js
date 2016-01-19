@@ -239,6 +239,9 @@ handlers.resetAttributs = function() {
     var shieldsIncr = shields - startShield;
     var livesIncr = lives - startLives;
 
+    return { messageValue: "resetAttributs : coins "  + coinsIncr + " keys " + keysIncr + " shields " + shieldsIncr + " " + livesIncr};
+
+
     handlers.addAttributs(-coinsIncr, -shieldsIncr, -keysIncr, -livesIncr);
 
 }
