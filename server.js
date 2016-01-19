@@ -300,13 +300,13 @@ handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
     }
 
     // Live
-    if (lives != null ) {
         if (lives.RemainingUses + livesAdd < 0) {
             livesAdd = -lives.RemainingUses;
         }
         if (livesAdd != 0) {
             handlers.modifyItemUses(lives.ItemInstanceId, livesAdd);
         }
+    if (lives != null ) {
     }
 }
 
