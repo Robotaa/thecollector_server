@@ -292,7 +292,7 @@ handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
             handlers.modifyItemUses(shields.ItemInstanceId, shieldsAdd);
         }
     } else {
-        for (var i = 0; i < shield; ++i) {
+        for (var i = 0; i < shieldsAdd; ++i) {
             itemIds.push("att_shield");
         }
     }
@@ -306,7 +306,7 @@ handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
             handlers.modifyItemUses(keys.ItemInstanceId, keysAdd);
         }
     } else {
-        for (var i = 0; i < keys; ++i) {
+        for (var i = 0; i < keysAdd; ++i) {
             itemIds.push("att_key");
         }
     }
@@ -320,7 +320,7 @@ handlers.addAttributs = function(coinsAdd, shieldsAdd, keysAdd, livesAdd) {
             handlers.modifyItemUses(lives.ItemInstanceId, livesAdd);
         }
     } else {
-        for (var i = 0; i < lives; ++i) {
+        for (var i = 0; i < livesAdd; ++i) {
             itemIds.push("att_life");
         }
     }
