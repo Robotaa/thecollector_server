@@ -123,7 +123,7 @@ handlers.manageItemEffect = function (args) {
     var itemId = args.itemId;
     var itemInstanceId = args.itemInstanceId;
 
-    // Get atrtibuts values
+    // Get attributs values
     var userIventory = server.GetUserInventory({
         PlayFabId: currentPlayerId,
     });
@@ -250,7 +250,7 @@ handlers.manageItemEffect = function (args) {
 //     }
 
     // Consume the item found on the grid
-    //handlers.consumeItem(itemInstanceId);
+    handlers.consumeItem(itemInstanceId);
 
     return { messageValue: "Manage Item Effect : consumeItem " + itemInstanceId };
 }
